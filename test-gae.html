@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr-FR">
+    <head>
+        <title>Test GAE</title>
+        <script type="text/javascript">//<![CDATA[
+            var _gaq = _gaq || [];
+            // _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+            _gaq.push(['_setCampSourceKey','__gae_utm_source'],['_setCampNameKey','__gae_utm_campaign'],['_setCampMediumKey','__gae_utm_medium'],['_setCampTermKey','__gae_utm_term'],['_setCampContentKey','__gae_utm_content'],['_setCampaignTrackByCookies',true]);
+            _gaq.push(['_trackPageview']);
+            (function () {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = 'http://localhost/google-analytics-extended/gae.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+        //]]></script>
+        <script type="text/javascript">//<![CDATA[
+
+            function getCookie(name) {
+                var cookies = document.cookie.split(';');
+                name = RegExp('^\\s*' + name + '=\\s*(.*?)\\s*$');
+                for (var i = 0; i < cookies.length; ++i) {
+                    var a = cookies[i].match(name);
+                    if (a) {
+                        return a[1];
+                    }
+                }
+                return '';
+            }
+
+            function setCookie(name, content, expires, path, domain) {
+                path || (path = '/');
+                domain || (domain = '.localhost');
+
+                var a = name + '=' + content + ';';
+                path && (a += ' path=' + path + ';');
+                expires && (a += ' expires=' + (new Date((new Date).getTime() + expires)).toGMTString() + ';');
+                domain && (a += ' domain=' + domain + ';');
+                document.cookie = a;
+            }
+
+            function deleteCookie(name) {
+                setCookie(name, '', -1);
+            }
+
+            function deleteAllCookies() {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; ++i) {
+                    deleteCookie(cookies[i].split('=')[0]);
+                }
+            }
+
+            function onSubmitCookieForm() {
+                var items = ['source', 'campaign', 'medium', 'term', 'content'];
+                for (var i = 0; i < items.length; ++i) {
+                    var input = document.getElementById('bycookie_' + items[i]);
+                    if (input.value) {
+                        setCookie('__gae_utm_' + items[i], input.value, 1800000);
+                    } else {
+                        deleteCookie('__gae_utm_' + items[i]);
+                    }
+                    input.value = '';
+                }
+                document.location.href = document.getElementById("bycookie_form").action;
+                return false;
+            }
+
+        //]]></script>
+    </head>
+    <body>
+        <h1><a href="http://localhost/google-analytics-extended/test-gae.html">Test GAE</a></h1>
+        <p>
+            <b>Cookies :</b>&nbsp;
+            <a href="" onclick="javascript:deleteAllCookies();return false;">Reset all cookies</a>&nbsp;
+            <a href="" onclick="javascript:deleteCookie('__utmz');return false;">Reset __utmz</a>
+        </p>
+        <div id="byurl" style="border: 1px solid black; display: inline-block; padding: 10px;">
+            <h4>Campaign by URL params</h4>
+            <form id="byurl_form" action="http://localhost/google-analytics-extended/test-gae.html" method="get">
+                <table>
+                    <tr>
+                        <td><label for="byurl_source">Source :</label></td>
+                        <td><input type="text" id="byurl_source" name="utm_source" value="__source__" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="byurl_campaign">Campaign :</label></td>
+                        <td><input type="text" id="byurl_campaign" name="utm_campaign" value="__campaign__" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="byurl_medium">Medium :</label></td>
+                        <td><input type="text" id="byurl_medium" name="utm_medium" value="__medium__" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="byurl_term">Term :</label></td>
+                        <td><input type="text" id="byurl_term" name="utm_term" value="__term__" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="byurl_content">Content :</label></td>
+                        <td><input type="text" id="byurl_content" name="utm_content" value="__content__" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="bycookie" style="border: 1px solid black; display: inline-block; padding: 10px;">
+            <h4>Campaign by cookies</h4>
+            <form id="bycookie_form" action="http://localhost/google-analytics-extended/test-gae.html" method="get" onsubmit="javascript:return onSubmitCookieForm();">
+                <table>
+                    <tr>
+                        <td><label for="bycookie_source">Source :</label></td>
+                        <td><input type="text" id="bycookie_source" name="__gae_utm_source" value="__source__" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="bycookie_campaign">Campaign :</label></td>
+                        <td><input type="text" id="bycookie_campaign" name="__gae_utm_campaign" value="__campaign__" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="bycookie_medium">Medium :</label></td>
+                        <td><input type="text" id="bycookie_medium" name="__gae_utm_medium" value="__medium__" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="bycookie_term">Term :</label></td>
+                        <td><input type="text" id="bycookie_term" name="__gae_utm_term" value="__term__" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="bycookie_content">Content :</label></td>
+                        <td><input type="text" id="bycookie_content" name="__gae_utm_content" value="__content__" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </body>
+</html>

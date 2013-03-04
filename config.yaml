@@ -1,0 +1,33 @@
+debug: true
+replaced_tag: ''
+renamed_tag:  ''
+functions:
+    ha: setName
+    Aa: changeType(a, type)
+    Ba: isFunction
+    F:  isEmpty
+    Da: trim
+    Ea: getRandom
+    Fa: emptyFunction
+    Ga: addEventListener_(element, eventType, listener, useCapture)
+    Ha: removeEventListener_(element, eventType, listener, useCapture)
+    Ia: insertScript(src, id)
+    md: stopIfLocal
+    pd: getCookie(name)
+    X:  setCookie(name, content, path, domain, account, expires)
+    T:  T(a, b, c, usageIndex)
+    Qc: Qc(a, b, usageIndex, type)
+    V:  V(a, b, usageIndex, type, e)
+    od: usage
+    H:  setUsage(index)
+    Sc: isGoogleHost(domain, path)
+    ld: trackingRefused(account)
+    G:  encode
+    I:  decode
+variables:
+    bb: _domain
+    nc: _campaignSource
+    jc: _campaignName
+    oc: _campaignMedium
+    pc: _campaignTerm
+    qc: _campaignContent
